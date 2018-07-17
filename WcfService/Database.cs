@@ -5,7 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
-//commit?
+
 // Can be improved replacing Operation with string coded as Lddd where L is a letter and ddd are 3 digits describing the angle
 // For ex. R127 will be rotation RIGHT by 127 degree 
 public enum Operation{STOP,FORWARD,RIGHT,LEFT,PICTURE,NULL,ERROR,FORWARD2,BACKWARD2,RIGHT2,LEFT2};
