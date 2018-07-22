@@ -20,6 +20,7 @@ namespace WcfService
         static Picture picture;
         static int pictureId = 0;
         static Queue<Operation> operations = new Queue<Operation>();
+        //static Queue<string> operations = new Queue<string>();
 
         static string target = null;
         static List<string> checks;
@@ -29,10 +30,26 @@ namespace WcfService
         static bool dbLock = false;
 
         public Queue<Operation> getOperations() { return operations; }
+        //        public Queue<string> getOperations() { return operations; }
 
         public void addOperation(Operation op) { operations.Enqueue(op); }
+        //        public void addOperation(Operation op, int degree) { 
+        //      if(degree <0 || degree>180) return;
+        //      string oper;
+        //      switch(op){
+        //          case LEFT:
+        //                         oper = 'L';
+        //                        break;
+        //          default:
+        //                         oper = 'R';
+        //                        break;
+        //      }
+        //      string command = oper + degree;
+        //      operations.Enqueue(command); 
+        //    }
 
-        public Operation getOperation() {
+        public Operation getOperation()
+        {
             if (operations.Count > 0)
             {
                 currentOp = readOperation();
@@ -42,6 +59,17 @@ namespace WcfService
                 return Operation.NULL;
         }
 
+        //        public string getOperation()
+        //        {
+        //            if (operations.Count > 0)
+        //            {
+        //                currentOp = readOperation();
+        //                return operations.Dequeue();
+        //            }
+        //            else
+        //                return NULL;
+        //        }
+
         public Operation readOperation()
         {
             if (operations.Count > 0)
@@ -49,6 +77,14 @@ namespace WcfService
             else
                 return Operation.NULL;
         }
+
+//        public string readOperation()
+//        {
+//            if (operations.Count > 0)
+//                return operations.ElementAt(0);
+//            else
+//                return NULL;
+//        }
 
         public void removeAllOperation()
         {
