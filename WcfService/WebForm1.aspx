@@ -6,10 +6,9 @@
 <head runat="server">
     <title></title>
     <style>
-        p, h1{
+p, h1{
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-            width: 900px;
-        }
+}
 
 .opList{
     width: 100% !important;
@@ -27,15 +26,14 @@ input[type=text], select {
 }
 
 input[type=submit] {
-        border-style: none;
-            border-color: inherit;
-            border-width: medium;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px;
-            border-radius: 4px;
-            cursor: pointer;
+    width: auto;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 input[type=submit]:hover {
@@ -44,11 +42,8 @@ input[type=submit]:hover {
 </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div style="height: 72px; width: 130px; margin-left: 930px; margin-top: 0px; margin-bottom: 0px">
-            <asp:Button ID="Button1" runat="server" Height="50px" Text="Products" Width="116px" OnClick="Button1_Click" />
-        </div>
     <h1>Kiva Car: Manage your robot</h1>
+    <form id="form1" runat="server">
         <p>
             Connection status:<asp:TextBox ID="TextBox1" runat="server" ReadOnly="true"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IP<asp:TextBox ID="TextBox2" runat="server" ReadOnly="true"></asp:TextBox>

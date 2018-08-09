@@ -68,10 +68,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="zxing">
-      <HintPath>lib\zxing.dll</HintPath>
+      <HintPath>..\packages\net4.5\zxing.dll</HintPath>
     </Reference>
     <Reference Include="zxing.presentation">
-      <HintPath>lib\zxing.presentation.dll</HintPath>
+      <HintPath>..\packages\net4.5\zxing.presentation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +86,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="WebForm1.aspx" />
-    <Content Include="Products.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
@@ -127,13 +126,6 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Products.aspx.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Products.aspx.designer.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

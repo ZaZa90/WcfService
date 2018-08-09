@@ -49,7 +49,7 @@ namespace WcfService
                     reader = com.ExecuteReader();
 
                     if (reader.HasRows)
-                    { 
+                { 
                     Session["username"] = TextBox_user_name.Text;
                         // pagina di controllo
                         Response.Redirect("WebForm1.aspx");
