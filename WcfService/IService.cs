@@ -15,6 +15,10 @@ namespace WcfService
     public interface IService
     {
         [OperationContract]
+        [WebInvoke(UriTemplate = "conf/{conf}", Method = "POST")]
+        void RecvConf(string conf);
+
+        [OperationContract]
         [WebInvoke(UriTemplate = "ip/{ip}", Method = "POST")]
         void RecvIp(string ip);
 

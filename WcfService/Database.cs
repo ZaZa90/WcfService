@@ -8,7 +8,7 @@ using System.Web;
 
 // Can be improved replacing Operation with string coded as Lddd where L is a letter and ddd are 3 digits describing the angle
 // For ex. R127 will be rotation RIGHT by 127 degree 
-public enum Operation{STOP,FORWARD,RIGHT,LEFT,PICTURE,NULL,ERROR,FORWARD2,BACKWARD2,RIGHT2,LEFT2};
+public enum Operation { STOP, FORWARD, RIGHT, LEFT, PICTURE, NULL, ERROR, FORWARD2, BACKWARD2, RIGHT2, LEFT2 };
 
 public enum Dir { NORTH, SOUTH, EAST, WEST };
 
@@ -28,6 +28,23 @@ namespace WcfService
         static string currentDest;
         static string status;
         static bool dbLock = false;
+        static int storageDim = 3; //Default value: 3
+        static bool init = true;
+        static float[] conf = { 0,0,0,0};
+
+        public void setConf(float v0=0, float v1=0, float v2=0, float v3=0) {
+            if (v0 != 0) conf[0] = v0;
+            if (v1 != 0) conf[1] = v1;
+            if (v2 != 0) conf[2] = v2;
+            if (v3 != 0) conf[3] = v3;
+        }
+        public float getConf(int index) { return conf[index]; }
+
+        public void setStorageDim(int val) { storageDim = val; }
+        public int getStorageDim() { return storageDim; }
+
+        public void setInit(bool b) { init = b; }
+        public bool needsInit() { return init; }
 
         public Queue<Operation> getOperations() { return operations; }
         //        public Queue<string> getOperations() { return operations; }

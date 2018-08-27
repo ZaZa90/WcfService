@@ -11,7 +11,7 @@ namespace WcfService
     public partial class RegistrationForm : System.Web.UI.Page
     {
         string str;
-        string strcon = "Server=localhost;Database=Robocar;Uid=root;Pwd=;SslMode=none;port=3306";
+        string strcon = "Server=localhost;Database=robocar;Uid=root;Pwd=;SslMode=none;port=3306";
         protected void Button1_Click(object Sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection(strcon);
