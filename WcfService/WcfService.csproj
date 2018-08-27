@@ -79,6 +79,7 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="Config.aspx" />
     <Content Include="LoginForm.aspx" />
     <Content Include="RegistrationForm.aspx" />
     <Content Include="Service.svc" />
@@ -89,6 +90,13 @@
     <Content Include="Products.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.aspx.cs">
+      <DependentUpon>Config.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Config.aspx.designer.cs">
+      <DependentUpon>Config.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="LoginForm.aspx.cs">
@@ -180,7 +188,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49452</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49452/</IISUrl>
+          <IISUrl>http://localhost:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

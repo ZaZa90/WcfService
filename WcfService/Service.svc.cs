@@ -20,12 +20,21 @@ namespace WcfService
 
         private Database database = new Database();
 
+        public void RecvConf(string conf)
+        {
+            string[] config = conf.Split(',');
+            database.setConf(float.Parse(config[0]), float.Parse(config[1]), float.Parse(config[2]), float.Parse(config[3])) ;
+            Debug.Print("[Service] Received config:" + conf);
+        }
 
-        public void RecvIp(string ip) { database.SetIp(ip); }
+        public void RecvIp(string ip) {
+            database.SetIp(ip);
+            Debug.Print("[Service] Received ip:"+ip);
+        }
 
         public string SendIp() { return database.GetIp(); }
 
-        public Operation SendOperation() { return database.getNextLocalTarget();  }
+        public Operation SendOperation() { Debug.Print("[SERVER] Operation list counts "+ database.getOperations().Count +" elems"); return database.getOperation(); return database.getNextLocalTarget();  }
 
         public int RecvPictureTCP(string numBytes)
         {

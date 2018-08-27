@@ -64,9 +64,6 @@ input[type=submit]:hover {
             &nbsp;Next operation list:<asp:TextBox ID="TextBox4" runat="server" CssClass="opList" ReadOnly="true"></asp:TextBox>
         </p>
         <p>
-            Insert Grid Dimension:<asp:TextBox ID="TextBox5" runat="server"></asp:TextBox><asp:Button ID="ButtonDim" runat="server" OnClick="Set_Grid_Dim" Text="Set" />
-        </p>
-        <p>
             Target:<asp:DropDownList ID="ddlDim" runat="server" AppendDataBoundItems="true"></asp:DropDownList>
         </p>
         <p>
@@ -82,16 +79,6 @@ input[type=submit]:hover {
             <asp:Button ID="ButtonSetTarget" runat="server" OnClick="Set_Target" Text="Start" />
         </p>
         <p>
-            MANUAL DRIVE ~ Test Mode</p>
-        <p>
-            <asp:Button ID="ButtonManualStop" runat="server" OnClick="Stop_Click" Text="STOP" />
-            <asp:Button ID="ButtonManualForward" runat="server" OnClick="Forward_Click" Text="FORWARD" />
-            <asp:Button ID="ButtonManualBackward" runat="server" OnClick="Backward_Click" Text="BACKWARD" />
-            <asp:Button ID="ButtonManualRight" runat="server" OnClick="Right_Click" Text="RIGHT" />
-            <asp:Button ID="ButtonManualLeft" runat="server" OnClick="Left_Click" Text="LEFT" />
-            <asp:Button ID="ButtonPicture" runat="server" OnClick="Picture_Click" Text="TAKE PICTURE" />
-        </p>
-        <p>
             Last Picture: </p>
         <p>
             <asp:Image ID="Image1" runat="server"/>
@@ -101,9 +88,8 @@ input[type=submit]:hover {
             <asp:Label ID="Label2" runat="server" Text="Picture Code:"></asp:Label>
             <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
         </p>
-        Car&#39;s Settings:<p>
-            <asp:Table ID="Table1" runat="server">
-            </asp:Table>
+        <p>
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Config.aspx">Car&#39;s Configuration & Test</asp:HyperLink>
         </p>
     </form>
     </body>

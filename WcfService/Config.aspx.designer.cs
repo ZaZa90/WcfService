@@ -10,7 +10,7 @@
 namespace WcfService {
     
     
-    public partial class WebForm1 {
+    public partial class Config {
         
         /// <summary>
         /// Controllo form1.
@@ -22,13 +22,13 @@ namespace WcfService {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Controllo Button1.
+        /// Controllo Label1.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// Controllo TextBox1.
@@ -40,6 +40,15 @@ namespace WcfService {
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
+        /// Controllo Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
         /// Controllo TextBox2.
         /// </summary>
         /// <remarks>
@@ -49,22 +58,13 @@ namespace WcfService {
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
         
         /// <summary>
-        /// Controllo ButtonReload.
+        /// Controllo Label3.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonReload;
-        
-        /// <summary>
-        /// Controllo ButtonReset.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonReset;
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// Controllo TextBox3.
@@ -76,13 +76,13 @@ namespace WcfService {
         protected global::System.Web.UI.WebControls.TextBox TextBox3;
         
         /// <summary>
-        /// Controllo StatusBox.
+        /// Controllo Label4.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StatusBox;
+        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
         /// Controllo TextBox4.
@@ -94,76 +94,94 @@ namespace WcfService {
         protected global::System.Web.UI.WebControls.TextBox TextBox4;
         
         /// <summary>
-        /// Controllo ddlDim.
+        /// Controllo Button1.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDim;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// Controllo panel1.
+        /// Controllo Label5.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel1;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// Controllo chkList.
+        /// Controllo TextBox5.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList chkList;
+        protected global::System.Web.UI.WebControls.TextBox TextBox5;
         
         /// <summary>
-        /// Controllo ButtonSetTarget.
+        /// Controllo ButtonDim.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSetTarget;
+        protected global::System.Web.UI.WebControls.Button ButtonDim;
         
         /// <summary>
-        /// Controllo Image1.
+        /// Controllo ButtonManualStop.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Button ButtonManualStop;
         
         /// <summary>
-        /// Controllo Label4.
+        /// Controllo ButtonManualForward.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Button ButtonManualForward;
         
         /// <summary>
-        /// Controllo Label2.
+        /// Controllo ButtonManualBackward.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Button ButtonManualBackward;
         
         /// <summary>
-        /// Controllo Label3.
+        /// Controllo ButtonManualRight.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Button ButtonManualRight;
+        
+        /// <summary>
+        /// Controllo ButtonManualLeft.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonManualLeft;
+        
+        /// <summary>
+        /// Controllo ButtonPicture.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonPicture;
         
         /// <summary>
         /// Controllo HyperLink1.

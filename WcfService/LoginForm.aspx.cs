@@ -17,7 +17,7 @@ namespace WcfService
             
         }
 
-            string strcon = "Server=localhost;Database=Robocar;Uid=root;Pwd=;SslMode=none;";
+            string strcon = "Server=localhost;Database=robocar;Uid=root;Pwd=;SslMode=none;";
 
             string str;
 
