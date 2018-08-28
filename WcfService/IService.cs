@@ -28,7 +28,7 @@ namespace WcfService
 
         [OperationContract]
         [WebInvoke(UriTemplate = "operation", Method = "GET")]
-        Operation SendOperation();
+        String SendOperation();
 
         [OperationContract]
         [WebInvoke(UriTemplate = "picture/TCP/{numBytes}", Method = "POST")]

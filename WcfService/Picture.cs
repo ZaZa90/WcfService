@@ -109,7 +109,7 @@ namespace WcfService
 
         
         public float getAngle() {
-            float vx, vy, ax, ay, bx, by, m12, m13, m23, p1, p2, p3, p4;
+            float vx, vy, ax, ay, bx, by, m12, m13, m23, p1, p2, p3;
             float selectedCoeff1, selectedCoeff2;
             float angleRad, displacement;
             float[] x, y;

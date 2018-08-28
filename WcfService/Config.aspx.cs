@@ -65,7 +65,7 @@ namespace WcfService
         {
             //Take Picture
             if (!database.getLock())
-                database.addOperation(Operation.PICTURE);
+                database.addOperation("PICT");
         }
 
 
@@ -73,35 +73,35 @@ namespace WcfService
         {
             //Manual Left
             if (!database.getLock())
-                database.addOperation(Operation.LEFT2);
+                database.addOperation("L000");
         }
 
         protected void Forward_Click(object sender, EventArgs e)
         {
             //Manual Forward
             if (!database.getLock())
-                database.addOperation(Operation.FORWARD2);
+                database.addOperation("F000");
         }
 
         protected void Right_Click(object sender, EventArgs e)
         {
             //Manual Right
             if (!database.getLock())
-                database.addOperation(Operation.RIGHT2);
+                database.addOperation("R000");
         }
 
         protected void Backward_Click(object sender, EventArgs e)
         {
             //Manual Backward
             if (!database.getLock())
-                database.addOperation(Operation.BACKWARD2);
+                database.addOperation("B000");
         }
 
         protected void Stop_Click(object sender, EventArgs e)
         {
             //Manual Stop
             if (!database.getLock())
-                database.addOperation(Operation.STOP);
+                database.addOperation("STOP");
         }
     }
 

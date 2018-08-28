@@ -19,12 +19,12 @@ namespace WcfService
         static string ip = "0.0.0.0";
         static Picture picture;
         static int pictureId = 0;
-        static Queue<Operation> operations = new Queue<Operation>();
+        static Queue<String> operations = new Queue<String>();
         //static Queue<string> operations = new Queue<string>();
 
         static string target = null;
         static List<string> checks;
-        static Operation currentOp;
+        static String currentOp;
         static string currentDest;
         static string status;
         static bool dbLock = false;
@@ -46,10 +46,10 @@ namespace WcfService
         public void setInit(bool b) { init = b; }
         public bool needsInit() { return init; }
 
-        public Queue<Operation> getOperations() { return operations; }
+        public Queue<String> getOperations() { return operations; }
         //        public Queue<string> getOperations() { return operations; }
 
-        public void addOperation(Operation op) { operations.Enqueue(op); }
+        public void addOperation(String op) { operations.Enqueue(op); }
         //        public void addOperation(Operation op, int degree) { 
         //      if(degree <0 || degree>180) return;
         //      string oper;
@@ -65,7 +65,7 @@ namespace WcfService
         //      operations.Enqueue(command); 
         //    }
 
-        public Operation getOperation()
+        public String getOperation()
         {
             if (operations.Count > 0)
             {
@@ -73,7 +73,7 @@ namespace WcfService
                 return operations.Dequeue();
             }
             else
-                return Operation.NULL;
+                return "NULL";
         }
 
         //        public string getOperation()
@@ -87,12 +87,12 @@ namespace WcfService
         //                return NULL;
         //        }
 
-        public Operation readOperation()
+        public String readOperation()
         {
             if (operations.Count > 0)
                 return operations.ElementAt(0);
             else
-                return Operation.NULL;
+                return "NULL";
         }
 
 //        public string readOperation()
@@ -131,7 +131,7 @@ namespace WcfService
         }
 
         // If target is set return next target, otherwise calls getOperation()
-        public Operation getNextLocalTarget()
+        public String getNextLocalTarget()
         {
             int i;
             string currPos = picture.getQRCode();
@@ -156,7 +156,7 @@ namespace WcfService
                             status = "Target " + target + " reached. "; //PRINT Arrived on target currPos
                             setLock(false);
                             target = null;
-                            return Operation.NULL;
+                            return "NULL";
                         }
                         else status = "Checkpoint " + currPos + " reached. "; //Print arrived on checkpoint currPos
                     }
@@ -206,27 +206,29 @@ namespace WcfService
         // Enqueue the operations needed to reach currentDest in the database
         private void findRoute(string currPos, Dir dir)
         {
+            float angle = picture.getAngle();
             Dir newDir;
             int Trow = (int)currentDest[0];
             int Tcol = (int)currentDest[1];
             int CProw = (int)currPos[0];
             int CPcol = (int)currPos[1];
+            string.Format("{0:00}", angle);
             if (Trow - CProw > 0)
             {
                 //ALERT! BACKWARD2 used because no BACKWARD was found
                 switch (dir)
                 {
                     case Dir.NORTH:
-                        addOperation(Operation.BACKWARD2);
+                        addOperation("B" + angle.ToString());
                         break;
                     case Dir.SOUTH:
-                        addOperation(Operation.FORWARD);
+                        addOperation("F" + angle.ToString());
                         break;
                     case Dir.EAST:
-                        addOperation(Operation.RIGHT);
+                        addOperation("R" + angle.ToString());
                         break;
                     default:
-                        addOperation(Operation.LEFT);
+                        addOperation("L" + angle.ToString());
                         break;
                 }
                 newDir = Dir.SOUTH;
@@ -236,16 +238,16 @@ namespace WcfService
                 switch (dir)
                 {
                     case Dir.NORTH:
-                        addOperation(Operation.FORWARD);
+                        addOperation("F" + angle.ToString());
                         break;
                     case Dir.SOUTH:
-                        addOperation(Operation.BACKWARD2);
+                        addOperation("B" + angle.ToString());
                         break;
                     case Dir.EAST:
-                        addOperation(Operation.LEFT);
+                        addOperation("L" + angle.ToString());
                         break;
                     default:
-                        addOperation(Operation.RIGHT);
+                        addOperation("R" + angle.ToString());
                         break;
                 }
                 newDir = Dir.NORTH;
@@ -253,7 +255,7 @@ namespace WcfService
             else newDir = dir;
             for (int i = 1; i < Math.Abs(Trow - CProw); i++)
             {
-                addOperation(Operation.FORWARD);
+                addOperation("F" + angle.ToString());
             }
 
             if (Tcol - CPcol > 0)
@@ -262,16 +264,16 @@ namespace WcfService
                 switch (newDir)
                 {
                     case Dir.NORTH:
-                        addOperation(Operation.RIGHT);
+                        addOperation("R" + angle.ToString());
                         break;
                     case Dir.SOUTH:
-                        addOperation(Operation.LEFT);
+                        addOperation("L" + angle.ToString());
                         break;
                     case Dir.EAST:
-                        addOperation(Operation.FORWARD);
+                        addOperation("F" + angle.ToString());
                         break;
                     default:
-                        addOperation(Operation.BACKWARD2);
+                        addOperation("B" + angle.ToString());
                         break;
                 }
             }
@@ -280,22 +282,22 @@ namespace WcfService
                 switch (newDir)
                 {
                     case Dir.NORTH:
-                        addOperation(Operation.LEFT);
+                        addOperation("L" + angle.ToString());
                         break;
                     case Dir.SOUTH:
-                        addOperation(Operation.RIGHT);
+                        addOperation("R" + angle.ToString());
                         break;
                     case Dir.EAST:
-                        addOperation(Operation.BACKWARD2);
+                        addOperation("B" + angle.ToString());
                         break;
                     default:
-                        addOperation(Operation.FORWARD);
+                        addOperation("F" + angle.ToString());
                         break;
                 }
             }
             for (int i = 1; i < Math.Abs(Tcol - CPcol); i++)
             {
-                addOperation(Operation.FORWARD);
+                addOperation("F" + angle.ToString());
             }
 
         }
@@ -305,7 +307,7 @@ namespace WcfService
             return status;
         }
 
-        public Operation getCurrentOperation()
+        public String getCurrentOperation()
         {
             return currentOp;
         }

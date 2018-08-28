@@ -79,7 +79,7 @@ namespace WcfService
         private string printOperation()
         {
             string result = "";
-            foreach( Operation op in database.getOperations()){
+            foreach( String op in database.getOperations()){
                 result += op + ",";
             }
             return result;
