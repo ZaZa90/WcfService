@@ -6,19 +6,18 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-    <style type="text/css">
-
-        h1{
+    <style>
+        p, h1{
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-            width: 889px;
+            width: 900px;
         }
 
-        p{
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-            width: 887px;
-        }
+.opList{
+    width: 100% !important;
+    margin: 8px 0 !important;
+}
 
-input[type=text] {
+input[type=text], select {
     width: auto;
     padding: 12px 20px;
     margin: 8px;
@@ -38,17 +37,12 @@ input[type=submit] {
             margin: 8px;
             border-radius: 4px;
             cursor: pointer;
-            text-align: left;
-        }
+}
 
-        #Select1 {
-            width: 170px;
-            height: 31px;
-            margin-top: 0px;
-            margin-bottom: 19px;
-        }
-
-    </style>
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+</style>
 </head>
 <body style="height: 467px; width: 1072px;">
     <form id="form1" runat="server">

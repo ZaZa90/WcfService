@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -21,21 +22,21 @@ namespace WcfService
         {
             database.setInit(true);
 
-            Label1.Text = database.getConf(0).ToString("F2");
-            Label2.Text = database.getConf(1).ToString("F2");
-            Label3.Text = database.getConf(2).ToString("F2");
-            Label4.Text = database.getConf(3).ToString("F2");
+            Label1.Text = database.getConf(0).ToString("F2", CultureInfo.InvariantCulture);
+            Label2.Text = database.getConf(1).ToString("F2", CultureInfo.InvariantCulture);
+            Label3.Text = database.getConf(2).ToString("F2", CultureInfo.InvariantCulture);
+            Label4.Text = database.getConf(3).ToString("F2", CultureInfo.InvariantCulture);
             Label5.Text = database.getStorageDim().ToString();
         }
 
         protected void UpdateConfig(object sender, EventArgs e)
         {
-            float slow = (float.IsNaN(floatBoxConversion(TextBox1.Text))) ? float.Parse(Label1.Text) : float.Parse(TextBox1.Text);
-            float high = (float.IsNaN(floatBoxConversion(TextBox2.Text))) ? float.Parse(Label2.Text) : float.Parse(TextBox2.Text);
-            float lines = (float.IsNaN(floatBoxConversion(TextBox3.Text))) ? float.Parse(Label3.Text) : float.Parse(TextBox3.Text);
-            float turn = (float.IsNaN(floatBoxConversion(TextBox4.Text))) ? float.Parse(Label4.Text) : float.Parse(TextBox4.Text);
+            float slow = (float.IsNaN(floatBoxConversion(TextBox1.Text))) ? float.Parse(Label1.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox1.Text, CultureInfo.InvariantCulture);
+            float high = (float.IsNaN(floatBoxConversion(TextBox2.Text))) ? float.Parse(Label2.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox2.Text, CultureInfo.InvariantCulture);
+            float lines = (float.IsNaN(floatBoxConversion(TextBox3.Text))) ? float.Parse(Label3.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox3.Text, CultureInfo.InvariantCulture);
+            float turn = (float.IsNaN(floatBoxConversion(TextBox4.Text))) ? float.Parse(Label4.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox4.Text, CultureInfo.InvariantCulture);
             database.setConf(slow, high, lines, turn);
-            //database.addOperation(Operation.CONFIG);
+            database.addOperation("C" + slow.ToString("F2", CultureInfo.InvariantCulture) + '/' + high.ToString("F2", CultureInfo.InvariantCulture) + '/' + lines.ToString("F2", CultureInfo.InvariantCulture) + '/' + turn.ToString("F2", CultureInfo.InvariantCulture));
             ReloadData();
         }
 
