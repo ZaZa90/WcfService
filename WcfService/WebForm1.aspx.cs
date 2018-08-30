@@ -32,7 +32,7 @@ namespace WcfService
             }
 
             TextBox4.Text = printOperation();
-            TextBox3.Text = database.getCurrentOperation().ToString();
+            TextBox3.Text = database.getCurrentOperation();
             StatusBox.Text = database.getStatus();
 
             if (database.needsInit())
@@ -80,7 +80,8 @@ namespace WcfService
         {
             string result = "";
             foreach( String op in database.getOperations()){
-                result += op + ",";
+                if (result.Equals("")) result += op;
+                else result += ", " + op;
             }
             return result;
         }

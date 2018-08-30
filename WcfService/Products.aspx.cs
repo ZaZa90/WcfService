@@ -10,8 +10,9 @@ namespace WcfService
 {
     public partial class Products : System.Web.UI.Page
     {
+        Database database = new Database();
         string str;
-        string strcon = "Server=localhost;Database=Robocar;Uid=root;Pwd=;SslMode=none;port=3306";
+        string strcon = "Server=localhost;Database=robocar;Uid=root;Pwd=;SslMode=none;port=3306";
         MySqlConnection con;
         MySqlCommand com;
         MySqlDataReader reader;
@@ -19,18 +20,28 @@ namespace WcfService
         {
             if (Session["username"] == null) Response.Redirect("LoginForm.aspx");
             con = new MySqlConnection(strcon);
-            
+            con.Open();
 
+            /*
             str = "Select Position from prodotti";
             com = new MySqlCommand(str, con);
 
-            con.Open();
+            
 
             reader = com.ExecuteReader();
             while (reader.Read()) {
                 DropDownList1.Items.Add(new ListItem(reader[0].ToString()));
             }
-            reader.Close();
+            reader.Close();*/
+            int dim = database.getStorageDim();
+            DropDownList1.Items.Clear();
+            for (int i = 0; i < dim; i++)
+            {
+                for (int j = 0; j < dim; j++)
+                {
+                    DropDownList1.Items.Add(new ListItem((char)(((int)'A') + i) + j.ToString(), (char)(((int)'A') + i) + j.ToString()));
+                }
+            }
         }
         protected void Home_Click(object Sender, EventArgs e)
         {
@@ -38,7 +49,8 @@ namespace WcfService
         }
         protected void Add_Click(object Sender, EventArgs e)
         {
-            str = "UPDATE prodotti SET PRODUCT=@Product WHERE POSITION=@Position;";
+            //str = "UPDATE prodotti SET PRODUCT=@Product WHERE POSITION=@Position;";
+            str = "INSERT INTO prodotti (position, product) VALUES(@Position, @Product) ON DUPLICATE KEY UPDATE POSITION=@Position , PRODUCT = @Product";
             com = new MySqlCommand(str, con);
 
             com.Parameters.AddWithValue("@Position", DropDownList1.Text);
