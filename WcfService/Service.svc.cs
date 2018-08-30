@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -23,7 +24,7 @@ namespace WcfService
         public void RecvConf(string conf)
         {
             string[] config = conf.Split(',');
-            database.setConf(float.Parse(config[0]), float.Parse(config[1]), float.Parse(config[2]), float.Parse(config[3])) ;
+            database.setConf(float.Parse(config[0], CultureInfo.InvariantCulture), float.Parse(config[1], CultureInfo.InvariantCulture), float.Parse(config[2], CultureInfo.InvariantCulture), float.Parse(config[3], CultureInfo.InvariantCulture)) ;
             Debug.Print("[Service] Received config:" + conf);
         }
 

@@ -35,7 +35,7 @@ namespace WcfService
         public void setConf(float v0=0, float v1=0, float v2=0, float v3=0) {
             if (v0 != 0) conf[0] = v0;
             if (v1 != 0) conf[1] = v1;
-            if (v2 != 0) conf[2] = v2;
+            if (v2 != 0) conf[2] = (float)Math.Round(v2);
             if (v3 != 0) conf[3] = v3;
         }
         public float getConf(int index) { return conf[index]; }
