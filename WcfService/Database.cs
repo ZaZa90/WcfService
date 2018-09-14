@@ -73,7 +73,10 @@ namespace WcfService
                 return operations.Dequeue();
             }
             else
+            {
+                currentOp = "";
                 return "NULL";
+            }
         }
 
         //        public string getOperation()

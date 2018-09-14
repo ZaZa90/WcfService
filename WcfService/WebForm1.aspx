@@ -45,24 +45,44 @@ input[type=submit]:hover {
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="height: 72px; width: 130px; margin-left: 930px; margin-top: 0px; margin-bottom: 0px">
-            <asp:Button ID="Button1" runat="server" Height="50px" Text="Products" Width="116px" OnClick="Button1_Click" />
-        </div>
     <h1>Kiva Car: Manage your robot</h1>
-        <p>
-            Connection status:<asp:TextBox ID="TextBox1" runat="server" ReadOnly="true"></asp:TextBox>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+
+        <asp:Timer ID="Timer1" runat="server" Enabled="true" Interval="500">
+        </asp:Timer>
+
+        <asp:UpdatePanel ID="StockPricePanel" runat="server" UpdateMode="Conditional">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Timer1" />
+            </Triggers>
+            <ContentTemplate>
+                <p>
+                    Connection status:<asp:TextBox ID="TextBox1" runat="server" ReadOnly="true"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IP<asp:TextBox ID="TextBox2" runat="server" ReadOnly="true"></asp:TextBox>
-            <asp:Button ID="ButtonReload" runat="server" OnClick="Reload_Click" Text="Reload" />
-            <asp:Button ID="ButtonReset" runat="server" OnClick="Reset_Click" Text="Reset" />
-        </p>
-        <p>
-            Current operation:<asp:TextBox ID="TextBox3" runat="server" ReadOnly="true"></asp:TextBox>
+                    <asp:Button ID="ButtonReload" runat="server" OnClick="Reload_Click" Text="Reload" />
+                    <asp:Button ID="ButtonReset" runat="server" OnClick="Reset_Click" Text="Reset" />
+                </p>
+                <p>
+                    Current operation:<asp:TextBox ID="TextBox3" runat="server" ReadOnly="true"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Status:<asp:TextBox ID="StatusBox" runat="server" ReadOnly="true" Width="300px"></asp:TextBox>
-        </p>
-        <p>
-            &nbsp;Next operation list:<asp:TextBox ID="TextBox4" runat="server" CssClass="opList" ReadOnly="true"></asp:TextBox>
-        </p>
+                    Status:<asp:TextBox ID="StatusBox" runat="server" ReadOnly="true" Width="300px"></asp:TextBox>
+                </p>
+                <p>
+                    &nbsp;Next operation list:<asp:TextBox ID="TextBox4" runat="server" CssClass="opList" ReadOnly="true"></asp:TextBox>
+                </p>
+                <p>
+                    Last Picture: </p>
+                <p>
+                    <asp:Image ID="Image1" runat="server"/>
+                    <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                </p>
+                <p>
+                    <asp:Label ID="Label2" runat="server" Text="Picture Code:"></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                </p>  
+            </ContentTemplate>
+        </asp:UpdatePanel>
         <p>
             Target:<asp:DropDownList ID="ddlDim" runat="server" AppendDataBoundItems="true"></asp:DropDownList>
         </p>
@@ -77,16 +97,6 @@ input[type=submit]:hover {
         </p>
         <p>
             <asp:Button ID="ButtonSetTarget" runat="server" OnClick="Set_Target" Text="Start" />
-        </p>
-        <p>
-            Last Picture: </p>
-        <p>
-            <asp:Image ID="Image1" runat="server"/>
-            <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
-        </p>
-        <p>
-            <asp:Label ID="Label2" runat="server" Text="Picture Code:"></asp:Label>
-            <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
         </p>
         <p>
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Config.aspx">Car&#39;s Configuration & Test</asp:HyperLink>

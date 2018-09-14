@@ -13,6 +13,11 @@ namespace WcfService
     {
         Database database = new Database();
 
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            ReloadData();
+        }
+
         private void ReloadData()
         {
 
@@ -60,6 +65,7 @@ namespace WcfService
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"]==null) Response.Redirect("LoginForm.aspx");
+            Timer1.Tick += Timer1_Tick;
             ReloadData();
 
         }
@@ -99,11 +105,6 @@ namespace WcfService
                 database.SetTargetAndChecks(ddlDim.SelectedValue, selectedValues);
             }
 
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Products.aspx");
         }
     }
 }

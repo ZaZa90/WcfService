@@ -12,9 +12,15 @@ namespace WcfService
     {
         Database database = new Database();
 
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            ReloadData();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"] == null) Response.Redirect("LoginForm.aspx");
+            Timer1.Tick += Timer1_Tick;
             ReloadData();
         }
 
@@ -58,8 +64,11 @@ namespace WcfService
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR PARSING')", true);
 
             }
-            database.setStorageDim(dim);
-            ReloadData();
+            else if(dim > 0)
+            {
+                database.setStorageDim(dim);
+            }
+            else ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Value not permitted')", true);
         }
 
         protected void Picture_Click(object sender, EventArgs e)
@@ -103,6 +112,11 @@ namespace WcfService
             //Manual Stop
             if (!database.getLock())
                 database.addOperation("STOP");
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Products.aspx");
         }
     }
 

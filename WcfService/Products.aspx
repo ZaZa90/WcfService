@@ -44,12 +44,12 @@ input[type=submit]:hover {
 }
 </style>
 </head>
-<body style="height: 467px; width: 1072px;">
+<body>
     <form id="form1" runat="server">
-        <div style="height: 315px; width: 892px">
+        <div>
     <h1>Kiva Car: Add a new product</h1>
         <p>
-            Position:<asp:DropDownList ID="DropDownList1" runat="server" Height="77px" style="margin-top: 0px; margin-bottom: 20px" Width="109px">
+            Position:<asp:DropDownList ID="DropDownList1" runat="server" >
             </asp:DropDownList>
             &nbsp;&nbsp;&nbsp;&nbsp; New product:<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
             <asp:Button ID="ButtonAdd" runat="server" OnClick="Add_Click" Text="Add" />
@@ -57,9 +57,9 @@ input[type=submit]:hover {
             <p id="lb1">
                 <asp:Label ID="Label1" runat="server"></asp:Label>
         </p>
-            <div style="width: 211px; height: 309px; margin-left: 895px; margin-top: -150px; margin-bottom: 1px; top: 0px; z-index: 1;">
-                <asp:Button ID="Home" runat="server" Text="Home" onclick="Home_Click" Width="164px" />
-                <asp:Button ID="Logout" runat="server" Text="Logout" onclick="Logout_Click" Width="164px" />
+            <div>
+                <asp:Button ID="Home" runat="server" Text="Home" onclick="Home_Click" />
+                <asp:Button ID="Logout" runat="server" Text="Logout" onclick="Logout_Click" />
             </div>
         </div>
         </form>
