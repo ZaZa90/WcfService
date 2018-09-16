@@ -247,13 +247,22 @@ namespace WcfService {
         protected global::System.Web.UI.WebControls.Button ButtonDim;
         
         /// <summary>
-        /// Controllo Button2.
+        /// Controllo Table1.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Table Table1;
+        
+        /// <summary>
+        /// Controllo Update.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Update;
         
         /// <summary>
         /// Controllo HyperLink1.

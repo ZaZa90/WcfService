@@ -5,13 +5,23 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace WcfService
 {
+
     public partial class Config : System.Web.UI.Page
     {
         Database database = new Database();
-
+        string str;
+        string strcon = "Server=localhost;Database=robocar;Uid=root;Pwd=;SslMode=none;port=3306";
+        MySqlConnection con;
+        MySqlCommand com;
+        Dictionary<String, String> products = new Dictionary<string, string>();
+        DataTable dataTable = new DataTable();
+        DataGrid dataGrid = new DataGrid();
+        MySqlDataReader reader;
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             ReloadData();
@@ -19,9 +29,55 @@ namespace WcfService
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (Session["username"] == null) Response.Redirect("LoginForm.aspx");
             Timer1.Tick += Timer1_Tick;
             ReloadData();
+        
+            int dim = database.getStorageDim();
+            con = new MySqlConnection(strcon);
+
+            con.Open();
+
+
+            str = "Select Position, product from prodotti";
+            com = new MySqlCommand(str, con);
+            Console.WriteLine(com.ToString());
+            reader = com.ExecuteReader();
+            try
+            {
+                while (reader.Read())
+                {
+                    products.Add(reader[0].ToString(), reader[1].ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            for (int i = 0; i < dim; i++)
+            {
+                // Create new row and add it to the table.
+                TableRow tRow = new TableRow();
+                Table1.Rows.Add(tRow);
+                for (int j = 0; j < dim; j++)
+                {
+                    // Create a new cell and add it to the row.
+                    TableCell tCell = new TableCell();
+                    TextBox tb = new TextBox();
+                    tb.ID = (char)(((int)'A') + i) + j.ToString();
+                    if (products.ContainsKey((char)(((int)'A') + i) + j.ToString()))
+                        tb.Text = products[(char)(((int)'A') + i) + j.ToString()];
+                    else
+                        tb.Text = "";
+                    tCell.Controls.Add(tb);
+                    tCell.BorderWidth = 1;
+                    tRow.Cells.Add(tCell);
+                }
+
+            }
+            reader.Close();
         }
 
         protected void ReloadData()
@@ -64,7 +120,7 @@ namespace WcfService
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ERROR PARSING')", true);
 
             }
-            else if(dim > 0)
+            else if (dim > 0)
             {
                 database.setStorageDim(dim);
             }
@@ -118,7 +174,53 @@ namespace WcfService
         {
             Response.Redirect("Products.aspx");
         }
+        protected void Home_Click(object Sender, EventArgs e)
+        {
+            Response.Redirect("WebForm1.aspx");
+        }
+        protected void Update_Click(object Sender, EventArgs e)
+        {
+            //str = "UPDATE prodotti SET PRODUCT=@Product WHERE POSITION=@Position;";
+            int dim = database.getStorageDim();
+
+            for (int i = 0; i < dim; i++)
+            {
+                // Create new row and add it to the table.
+                TableRow tRow = new TableRow();
+                Table1.Rows.Add(tRow);
+
+                for (int j = 0; j < dim; j++)
+                {
+                    TextBox item = (TextBox)Table1.Rows[i].Cells[j].Controls[0];
+                    com.Parameters.Clear();
+                    if (item.Text.Equals(""))
+                    {
+                        str = "DELETE FROM prodotti WHERE Position = @Position";
+                        com = new MySqlCommand(str, con);
+
+                    }
+                    else
+                    {
+
+                        str = "INSERT INTO prodotti (position, product) VALUES(@Position, @Product) ON DUPLICATE KEY UPDATE POSITION=@Position , PRODUCT = @Product";
+                        com = new MySqlCommand(str, con);
+                        com.Parameters.AddWithValue("@Product", item.Text);
+                    }
+                    com.Parameters.AddWithValue("@Position", (char)(((int)'A') + i) + j.ToString());
+
+                    try
+                    {
+                        reader = com.ExecuteReader();
+                    }
+                    catch (Exception ex)
+                    {
+                        Label1.Text = ex.Message;
+                        reader.Close();
+                    }
+                    reader.Close();
+                }
+
+            }
+        }
     }
-
-
 }

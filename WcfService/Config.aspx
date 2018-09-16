@@ -159,11 +159,15 @@ input[type=submit]:hover {
         </p>
         <div>
             <p>Products Configuration</p>
-            <asp:Button ID="Button2" runat="server" Text="Products" OnClick="Button2_Click" />
+                <asp:Table ID="Table1" runat="server" Height="173px" Width="466px">
+                </asp:Table>
         </div>
+        <p>
+                <asp:Button ID="Update" runat="server" Text="Update" onclick="Update_Click" />
+        </p>
         <p>
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="WebForm1.aspx">Back</asp:HyperLink>
         </p>
     </form>
-</body>
+     </body>
 </html>
