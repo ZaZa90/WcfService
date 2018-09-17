@@ -20,6 +20,7 @@ namespace WcfService
         static Picture picture;
         static int pictureId = 0;
         static Queue<String> operations = new Queue<String>();
+        static Dictionary<String, String> products = new Dictionary<string, string>();
         //static Queue<string> operations = new Queue<string>();
 
         static string target = null;
@@ -322,6 +323,10 @@ namespace WcfService
         public bool getLock()
         {
             return dbLock;
+        }
+        public Dictionary<String, String> getProducts()
+        {
+            return products;
         }
     }
 }  

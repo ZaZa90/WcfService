@@ -19,9 +19,8 @@ namespace WcfService
         MySqlConnection con;
         MySqlCommand com;
         Dictionary<String, String> products = new Dictionary<string, string>();
-        DataTable dataTable = new DataTable();
-        DataGrid dataGrid = new DataGrid();
         MySqlDataReader reader;
+
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             ReloadData();
@@ -35,27 +34,7 @@ namespace WcfService
             ReloadData();
         
             int dim = database.getStorageDim();
-            con = new MySqlConnection(strcon);
-
-            con.Open();
-
-
-            str = "Select Position, product from prodotti";
-            com = new MySqlCommand(str, con);
-            Console.WriteLine(com.ToString());
-            reader = com.ExecuteReader();
-            try
-            {
-                while (reader.Read())
-                {
-                    products.Add(reader[0].ToString(), reader[1].ToString());
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            
             for (int i = 0; i < dim; i++)
             {
                 // Create new row and add it to the table.
@@ -67,8 +46,8 @@ namespace WcfService
                     TableCell tCell = new TableCell();
                     TextBox tb = new TextBox();
                     tb.ID = (char)(((int)'A') + i) + j.ToString();
-                    if (products.ContainsKey((char)(((int)'A') + i) + j.ToString()))
-                        tb.Text = products[(char)(((int)'A') + i) + j.ToString()];
+                    if (database.getProducts().ContainsKey((char)(((int)'A') + i) + j.ToString()))
+                        tb.Text = database.getProducts()[(char)(((int)'A') + i) + j.ToString()];
                     else
                         tb.Text = "";
                     tCell.Controls.Add(tb);
@@ -77,7 +56,7 @@ namespace WcfService
                 }
 
             }
-            reader.Close();
+          
         }
 
         protected void ReloadData()
@@ -182,6 +161,9 @@ namespace WcfService
         {
             //str = "UPDATE prodotti SET PRODUCT=@Product WHERE POSITION=@Position;";
             int dim = database.getStorageDim();
+            con = new MySqlConnection(strcon);
+            if (con.State == ConnectionState.Closed)
+                con.Open();
 
             for (int i = 0; i < dim; i++)
             {
@@ -192,10 +174,12 @@ namespace WcfService
                 for (int j = 0; j < dim; j++)
                 {
                     TextBox item = (TextBox)Table1.Rows[i].Cells[j].Controls[0];
-                    com.Parameters.Clear();
+                    if (com != null)
+                        com.Parameters.Clear();
                     if (item.Text.Equals(""))
                     {
                         str = "DELETE FROM prodotti WHERE Position = @Position";
+                        database.getProducts().Remove((char)(((int)'A') + i) + j.ToString());
                         com = new MySqlCommand(str, con);
 
                     }
@@ -203,6 +187,10 @@ namespace WcfService
                     {
 
                         str = "INSERT INTO prodotti (position, product) VALUES(@Position, @Product) ON DUPLICATE KEY UPDATE POSITION=@Position , PRODUCT = @Product";
+                        if (database.getProducts().ContainsKey((char)(((int)'A') + i) + j.ToString()))
+                            database.getProducts()[(char)(((int)'A') + i) + j.ToString()] = item.Text;
+                        else
+                            database.getProducts().Add((char)(((int)'A') + i) + j.ToString(), item.Text);
                         com = new MySqlCommand(str, con);
                         com.Parameters.AddWithValue("@Product", item.Text);
                     }
@@ -217,7 +205,8 @@ namespace WcfService
                         Label1.Text = ex.Message;
                         reader.Close();
                     }
-                    reader.Close();
+                    if(!reader.IsClosed)
+                        reader.Close();
                 }
 
             }
