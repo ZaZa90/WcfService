@@ -22,7 +22,5 @@ namespace WcfService.Properties {
                 return defaultInstance;
             }
         }
-
-        public string ConnectionString { get; internal set; }
     }
 }

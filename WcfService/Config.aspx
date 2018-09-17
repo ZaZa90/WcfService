@@ -159,7 +159,7 @@ input[type=submit]:hover {
         </p>
         <div>
             <p>Products Configuration</p>
-                <asp:Table ID="Table1" runat="server" Height="173px" Width="466px">
+             <asp:Table ID="Table1" runat="server" Height="173px" Width="466px">
                 </asp:Table>
         </div>
         <p>
@@ -169,5 +169,5 @@ input[type=submit]:hover {
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="WebForm1.aspx">Back</asp:HyperLink>
         </p>
     </form>
-     </body>
+</body>
 </html>
