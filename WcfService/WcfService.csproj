@@ -88,7 +88,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="WebForm1.aspx" />
-    <Content Include="Products.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.aspx.cs">
@@ -136,13 +135,6 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Products.aspx.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Products.aspx.designer.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -39,6 +39,8 @@ namespace WcfService
             {
                 Label4.Text = database.GetPicture().getUrl();
                 Label3.Text = database.GetPicture().getQRCode();
+                // TODO
+                Curr_pos.Text = (Label3.Text != "Error") ? Label3.Text : database.getCurrPos();
                 Image1.ImageUrl = database.GetPicture().getUrl();
             }
 

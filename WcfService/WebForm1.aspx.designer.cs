@@ -157,6 +157,15 @@ namespace WcfService {
         protected global::System.Web.UI.WebControls.DropDownList ddlDim;
         
         /// <summary>
+        /// Controllo Curr_pos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Curr_pos;
+        
+        /// <summary>
         /// Controllo panel1.
         /// </summary>
         /// <remarks>

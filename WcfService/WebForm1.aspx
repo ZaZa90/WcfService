@@ -85,6 +85,7 @@ input[type=submit]:hover {
         </asp:UpdatePanel>
         <p>
             Target:<asp:DropDownList ID="ddlDim" runat="server" AppendDataBoundItems="true"></asp:DropDownList>
+            Current Position:<asp:TextBox ID="Curr_pos" runat="server"></asp:TextBox>
         </p>
         <p>
             Binding CheckPoints:

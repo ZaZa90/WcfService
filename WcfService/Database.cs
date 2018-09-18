@@ -24,6 +24,7 @@ namespace WcfService
         //static Queue<string> operations = new Queue<string>();
 
         static string target = null;
+        static string currPos;
         static List<string> checks;
         static String currentOp;
         static string currentDest;
@@ -39,6 +40,12 @@ namespace WcfService
             if (v2 != 0) conf[2] = (float)Math.Round(v2);
             if (v3 != 0) conf[3] = v3;
         }
+
+        internal string getCurrPos()
+        {
+            return currPos;
+        }
+
         public float getConf(int index) { return conf[index]; }
 
         public void setStorageDim(int val) { storageDim = val; }
@@ -138,8 +145,13 @@ namespace WcfService
         public String getNextLocalTarget()
         {
             int i;
-            string currPos = picture.getQRCode();
-            float angle = picture.getAngle();
+            // TODO
+            float angle = 0;
+            if (!picture.getQRCode().Equals("Error"))
+            {
+                currPos = picture.getQRCode();
+                angle = picture.getAngle();
+            }
             Dir dir = (angle > 45 && angle <= 135) ? Dir.WEST : (angle > 135 && angle <= 225) ? Dir.SOUTH : (angle > 225 && angle <= 315) ? Dir.EAST : Dir.NORTH; 
             if (target != null)
             {
