@@ -18,6 +18,7 @@ namespace WcfService
         private string url;
         private string path;
         private string QR = "Error";
+        private int angle = -1;
 
         private ResultPoint[] resPts;
 
@@ -184,6 +185,7 @@ namespace WcfService
             {
                 QR = barcodeResult.Text;
                 resPts = barcodeResult.ResultPoints;
+                angle = (int)calculateAngle();
                 return 1;
             }
             catch (Exception e)
@@ -225,19 +227,20 @@ namespace WcfService
         base64code = code;
     }*/
 
-        
-        public float getAngle() {
+        public int getAngle() { return angle; }
+
+        public float calculateAngle() {
             float angle, displacement;
             double[] x, y;
 
             x = new double[3];
             y = new double[3];
             
-                        for (int i=0; i < 3; i++){
-                            x[i] = (double)resPts[i].X;
-                            y[i] = (double)resPts[i].Y;
-                        }
-            /*
+            for (int i=0; i < 3; i++){
+                x[i] = (double)resPts[i].X;
+                y[i] = (double)resPts[i].Y;
+            }
+/*
                                     //Angular Coefficients
                                     m12 = (y[1] - y[0]) / (x[1] - x[0]);
                                     m13 = (y[2] - y[0]) / (x[2] - x[0]);
