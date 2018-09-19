@@ -166,6 +166,9 @@ input[type=submit]:hover {
                 <asp:Button ID="Update" runat="server" Text="Update" onclick="Update_Click" />
         </p>
         <p>
+                <asp:Label ID="Label6" runat="server"/>
+        </p>
+        <p>
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="WebForm1.aspx">Back</asp:HyperLink>
         </p>
     </form>

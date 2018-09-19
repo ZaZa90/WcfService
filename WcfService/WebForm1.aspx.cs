@@ -14,7 +14,6 @@ namespace WcfService
     {
         Database database = new Database();
         String str;
-        string strcon = "Server=localhost;Database=robocar;Uid=root;Pwd=;SslMode=none;port=3306";
         MySqlConnection con;
         MySqlCommand com;
         MySqlDataReader reader;
@@ -50,9 +49,7 @@ namespace WcfService
             StatusBox.Text = database.getStatus();
 
             /*if (database.needsInit())
-            {
-                
-                
+            {                
                 database.setInit(false);
             }*/
         }
@@ -60,7 +57,8 @@ namespace WcfService
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"]==null) Response.Redirect("LoginForm.aspx");
-            
+            string strcon = "Server=localhost;Database=robocar;Uid=root;Pwd=;SslMode=none;port=3306";
+
             con = new MySqlConnection(strcon);
             if (con.State == ConnectionState.Closed)
                 con.Open();
@@ -91,7 +89,8 @@ namespace WcfService
 
                     while (reader.Read())
                     {
-                        database.getProducts().Add(reader[0].ToString(), reader[1].ToString());
+                        if(!database.getProducts().ContainsKey(reader[0].ToString()))
+                            database.getProducts().Add(reader[0].ToString(), reader[1].ToString());
                         chkList.Items.Add(new ListItem()
                         {
                             Text = reader[1].ToString(),
@@ -101,13 +100,22 @@ namespace WcfService
                 }
 
             }
-            catch (Exception ex)
+            catch (System.ArgumentException ex)
             {
-                reader.Close();
-                //Console.WriteLine(ex.Message);
+                Label5.Text = ex.StackTrace;
+               
             }
-            reader.Close();
-            con.Close();
+            catch(NullReferenceException ex)
+            {
+                Label5.Text = ex.StackTrace;
+
+                if (!reader.IsClosed)
+                    reader.Close();
+            }
+            if(!reader.IsClosed)
+                reader.Close();
+            if (con.State == ConnectionState.Open)
+                con.Close();
             Timer1.Tick += Timer1_Tick;
             ReloadData();
 

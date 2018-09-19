@@ -26,9 +26,9 @@ namespace WcfService
         static string target = null;
         static string currPos = "A0";
         static List<string> checks;
-        static String currentOp;
+        static String currentOp = "";
         static string currentDest;
-        static string status;
+        static string status = "";
         static bool dbLock = false;
         static int storageDim = 3; //Default value: 3
         static bool init = true;

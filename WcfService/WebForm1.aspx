@@ -108,6 +108,9 @@ input[type=submit]:hover {
             <asp:Button ID="ButtonSetTarget" runat="server" OnClick="Set_Target" Text="Start" />
         </p>
         <p>
+            <asp:Label ID="Label5" runat="server"></asp:Label>
+        </p>
+        <p>
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Config.aspx">Car&#39;s Configuration & Test</asp:HyperLink>
         </p>
     </form>

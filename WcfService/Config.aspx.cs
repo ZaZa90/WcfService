@@ -74,10 +74,10 @@ namespace WcfService
         {
             float slow = (float.IsNaN(floatBoxConversion(TextBox1.Text))) ? float.Parse(Label1.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox1.Text, CultureInfo.InvariantCulture);
             float high = (float.IsNaN(floatBoxConversion(TextBox2.Text))) ? float.Parse(Label2.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox2.Text, CultureInfo.InvariantCulture);
-            float lines = (float.IsNaN(floatBoxConversion(TextBox3.Text))) ? float.Parse(Label3.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox3.Text, CultureInfo.InvariantCulture);
-            float turn = (float.IsNaN(floatBoxConversion(TextBox4.Text))) ? float.Parse(Label4.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox4.Text, CultureInfo.InvariantCulture);
+            int lines =(int)((float.IsNaN(floatBoxConversion(TextBox3.Text))) ? float.Parse(Label3.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox3.Text, CultureInfo.InvariantCulture));
+            int turn = (int)((float.IsNaN(floatBoxConversion(TextBox4.Text))) ? float.Parse(Label4.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox4.Text, CultureInfo.InvariantCulture));
             database.setConf(slow, high, lines, turn);
-            database.addOperation("C" + slow.ToString("F2", CultureInfo.InvariantCulture) + '/' + high.ToString("F2", CultureInfo.InvariantCulture) + '/' + lines.ToString("F2", CultureInfo.InvariantCulture) + '/' + turn.ToString("F2", CultureInfo.InvariantCulture));
+            database.addOperation("C" + slow.ToString("F2", CultureInfo.InvariantCulture) + '/' + high.ToString("F2", CultureInfo.InvariantCulture) + '/' + lines.ToString() + '/' + turn.ToString());
             ReloadData();
         }
 
@@ -194,16 +194,16 @@ namespace WcfService
                         com = new MySqlCommand(str, con);
                         com.Parameters.AddWithValue("@Product", item.Text);
                     }
-                    com.Parameters.AddWithValue("@Position", (char)(((int)'A') + i) + j.ToString());
-
+                    com.Parameters.AddWithValue("@Position", (char)('A' + i) + j.ToString());
                     try
                     {
                         reader = com.ExecuteReader();
                     }
                     catch (Exception ex)
                     {
-                        Label1.Text = ex.Message;
-                        reader.Close();
+
+                        if (!reader.IsClosed)
+                            reader.Close();
                     }
                     if(!reader.IsClosed)
                         reader.Close();
