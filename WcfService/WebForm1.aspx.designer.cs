@@ -163,7 +163,16 @@ namespace WcfService {
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Curr_pos;
+        protected global::System.Web.UI.WebControls.DropDownList Curr_pos;
+        
+        /// <summary>
+        /// Controllo Curr_dir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Curr_dir;
         
         /// <summary>
         /// Controllo panel1.

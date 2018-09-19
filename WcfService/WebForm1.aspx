@@ -85,7 +85,15 @@ input[type=submit]:hover {
         </asp:UpdatePanel>
         <p>
             Target:<asp:DropDownList ID="ddlDim" runat="server" AppendDataBoundItems="true"></asp:DropDownList>
-            Current Position:<asp:TextBox ID="Curr_pos" runat="server"></asp:TextBox>
+        </p>
+        <p>
+            Current Position:<asp:DropDownList ID="Curr_pos" runat="server"></asp:DropDownList>
+            Current Direction:<asp:DropDownList ID="Curr_dir" runat="server">
+                                    <asp:ListItem Text="NORTH" Value="NORTH"></asp:ListItem>
+                                    <asp:ListItem Text="EAST" Value="NORTH"></asp:ListItem>
+                                    <asp:ListItem Text="SOUTH" Value="NORTH"></asp:ListItem>
+                                    <asp:ListItem Text="WEST" Value="NORTH"></asp:ListItem>
+                              </asp:DropDownList>
         </p>
         <p>
             Binding CheckPoints:

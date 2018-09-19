@@ -24,7 +24,7 @@ namespace WcfService
         //static Queue<string> operations = new Queue<string>();
 
         static string target = null;
-        static string currPos;
+        static string currPos = "A0";
         static List<string> checks;
         static String currentOp;
         static string currentDest;
@@ -33,6 +33,7 @@ namespace WcfService
         static int storageDim = 3; //Default value: 3
         static bool init = true;
         static float[] conf = { 0,0,0,0};
+        static Dir currDir = Dir.NORTH;
 
         public void setConf(float v0=0, float v1=0, float v2=0, float v3=0) {
             if (v0 != 0) conf[0] = v0;
@@ -145,14 +146,20 @@ namespace WcfService
         public String getNextLocalTarget()
         {
             int i;
+            Dir dir;
             // TODO
-            float angle = 0;
+            float angle;
             if (!picture.getQRCode().Equals("Error"))
             {
                 currPos = picture.getQRCode();
                 angle = picture.getAngle();
+                dir = (angle > 45 && angle <= 135) ? Dir.EAST : (angle > 135 && angle <= 225) ? Dir.SOUTH : (angle > 225 && angle <= 315) ? Dir.WEST : Dir.NORTH;
+                currDir = dir;
             }
-            Dir dir = (angle > 45 && angle <= 135) ? Dir.WEST : (angle > 135 && angle <= 225) ? Dir.SOUTH : (angle > 225 && angle <= 315) ? Dir.EAST : Dir.NORTH; 
+            else
+            {
+                dir = currDir;
+            }
             if (target != null)
             {
                 if (currentDest == null || currPos.Equals(currentDest))
@@ -179,7 +186,7 @@ namespace WcfService
                     // Next target selection
                     selectLocalTarget();
 
-                    // Find route
+                    // Find route step by step (to check)
                     findRoute(currPos, dir);
                 }
                 else if ((i = checks.FindIndex(o => string.Equals(currPos, o, StringComparison.OrdinalIgnoreCase))) > -1)
@@ -222,15 +229,18 @@ namespace WcfService
         // Enqueue the operations needed to reach currentDest in the database
         private void findRoute(string currPos, Dir dir)
         {
+            // calculate angle as displacement
             float angle = picture.getAngle();
-            Dir newDir;
             int Trow = (int)currentDest[0];
             int Tcol = (int)currentDest[1];
             int CProw = (int)currPos[0];
             int CPcol = (int)currPos[1];
-            string.Format("{0:00}", angle);
+            string.Format("{0:000}", angle);
             if (Trow - CProw > 0)
             {
+                angle = (180 - angle) % 360;
+                if (angle > 180)
+                    angle = angle - 180;
                 //ALERT! BACKWARD2 used because no BACKWARD was found
                 switch (dir)
                 {
@@ -247,10 +257,14 @@ namespace WcfService
                         addOperation("L" + angle.ToString());
                         break;
                 }
-                newDir = Dir.SOUTH;
+                currDir = Dir.SOUTH;
+                currPos = (CProw + 1).ToString() + CPcol.ToString(); 
             }
             else if (Trow - CProw < 0)
             {
+                angle = (-angle) % 360;
+                if (angle > 180)
+                    angle = angle - 180;
                 switch (dir)
                 {
                     case Dir.NORTH:
@@ -266,18 +280,16 @@ namespace WcfService
                         addOperation("R" + angle.ToString());
                         break;
                 }
-                newDir = Dir.NORTH;
+                currPos = (CProw - 1).ToString() + CPcol.ToString();
+                currDir = Dir.NORTH;
             }
-            else newDir = dir;
-            for (int i = 1; i < Math.Abs(Trow - CProw); i++)
+            else if (Tcol - CPcol > 0)
             {
-                addOperation("F" + angle.ToString());
-            }
-
-            if (Tcol - CPcol > 0)
-            {
+                angle = (90 - angle) % 360;
+                if (angle > 180)
+                    angle = angle - 180;
                 //ALERT! BACKWARD2 used because no BACKWARD was found
-                switch (newDir)
+                switch (dir)
                 {
                     case Dir.NORTH:
                         addOperation("R" + angle.ToString());
@@ -292,10 +304,15 @@ namespace WcfService
                         addOperation("B" + angle.ToString());
                         break;
                 }
+                currDir = Dir.EAST;
+                currPos = CProw.ToString() + (CPcol + 1).ToString();
             }
             else if(Tcol - CPcol < 0)
             {
-                switch (newDir)
+                angle = (270 - angle) % 360;
+                if (angle > 180)
+                    angle = angle - 180;
+                switch (dir)
                 {
                     case Dir.NORTH:
                         addOperation("L" + angle.ToString());
@@ -310,12 +327,9 @@ namespace WcfService
                         addOperation("F" + angle.ToString());
                         break;
                 }
+                currDir = Dir.WEST;
+                currPos = CProw.ToString() + (CPcol - 1).ToString();
             }
-            for (int i = 1; i < Math.Abs(Tcol - CPcol); i++)
-            {
-                addOperation("F" + angle.ToString());
-            }
-
         }
 
         public string getStatus()
@@ -340,5 +354,35 @@ namespace WcfService
         {
             return products;
         }
+        public void setPosition(String pos)
+        {
+            currPos = pos;
+        }
+        public String getPosition()
+        {
+            return currPos;
+        }
+        public void setDir(String dir)
+        {
+            switch(dir){
+
+                case "NORTH":
+                    currDir = Dir.NORTH;
+                    break;
+                case "EAST":
+                    currDir = Dir.EAST;
+                    break;
+                case "SOUTH":
+                    currDir = Dir.SOUTH;
+                    break;
+                case "WEST":
+                    currDir = Dir.WEST;
+                    break;
+            }
+        }
+        public string getDir()
+        {
+            return currDir.ToString();
+        } 
     }
 }  

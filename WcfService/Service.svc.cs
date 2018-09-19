@@ -35,7 +35,10 @@ namespace WcfService
 
         public string SendIp() { return database.GetIp(); }
 
-        public String SendOperation() { Debug.Print("[SERVER] Operation list counts "+ database.getOperations().Count +" elems"); return database.getOperation(); return database.getNextLocalTarget();  }
+        public String SendOperation() {
+            //Debug.Print("[SERVER] Operation list counts "+ database.getOperations().Count +" elems");
+            //return database.getOperation();
+            return database.getNextLocalTarget();  }
 
         public int RecvPictureTCP(string numBytes)
         {

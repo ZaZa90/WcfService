@@ -40,7 +40,8 @@ namespace WcfService
                 Label4.Text = database.GetPicture().getUrl();
                 Label3.Text = database.GetPicture().getQRCode();
                 // TODO
-                Curr_pos.Text = (Label3.Text != "Error") ? Label3.Text : database.getCurrPos();
+                Curr_pos.SelectedValue = (Label3.Text != "Error") ? Label3.Text : database.getCurrPos();
+                Curr_dir.SelectedValue = database.getDir();
                 Image1.ImageUrl = database.GetPicture().getUrl();
             }
 
@@ -78,7 +79,7 @@ namespace WcfService
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["username"]==null) Response.Redirect("LoginForm.aspx");
-            Timer1.Tick += Timer1_Tick;
+            
             con = new MySqlConnection(strcon);
             if (con.State == ConnectionState.Closed)
                 con.Open();
@@ -89,6 +90,10 @@ namespace WcfService
             reader = com.ExecuteReader();
             try
             {
+                int dim = database.getStorageDim();
+                for (int i = 0; i < dim; i++)
+                    for (int j = 0; j < dim; j++)
+                        Curr_pos.Items.Add(new ListItem((char)(((int)'A') + i) + j.ToString(), (char)(((int)'A') + i) + j.ToString()));
                 while (reader.Read())
                 {
                     database.getProducts().Add(reader[0].ToString(), reader[1].ToString());
@@ -98,11 +103,11 @@ namespace WcfService
             catch (Exception ex)
             {
                 reader.Close();
-                con.Close();
                 Console.WriteLine(ex.Message);
             }
             reader.Close();
             con.Close();
+            Timer1.Tick += Timer1_Tick;
             ReloadData();
 
         }
@@ -140,7 +145,8 @@ namespace WcfService
                     .ToList();
                 database.SetTargetAndChecks(ddlDim.SelectedValue, selectedValues);
             }
-
+            database.setDir(Curr_dir.SelectedValue);
+            database.setPosition(Curr_pos.SelectedValue);
         }
     }
 }
