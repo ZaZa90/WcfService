@@ -148,15 +148,6 @@ namespace WcfService {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// Controllo ddlDim.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDim;
-        
-        /// <summary>
         /// Controllo Curr_pos.
         /// </summary>
         /// <remarks>
@@ -173,6 +164,15 @@ namespace WcfService {
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Curr_dir;
+        
+        /// <summary>
+        /// Controllo ddlDim.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDim;
         
         /// <summary>
         /// Controllo panel1.

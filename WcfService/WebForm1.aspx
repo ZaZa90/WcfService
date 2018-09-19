@@ -80,20 +80,20 @@ input[type=submit]:hover {
                 <p>
                     <asp:Label ID="Label2" runat="server" Text="Picture Code:"></asp:Label>
                     <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-                </p>  
+                </p>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <p>
-            Target:<asp:DropDownList ID="ddlDim" runat="server" AppendDataBoundItems="true"></asp:DropDownList>
-        </p>
         <p>
             Current Position:<asp:DropDownList ID="Curr_pos" runat="server"></asp:DropDownList>
             Current Direction:<asp:DropDownList ID="Curr_dir" runat="server">
                                     <asp:ListItem Text="NORTH" Value="NORTH"></asp:ListItem>
-                                    <asp:ListItem Text="EAST" Value="NORTH"></asp:ListItem>
-                                    <asp:ListItem Text="SOUTH" Value="NORTH"></asp:ListItem>
-                                    <asp:ListItem Text="WEST" Value="NORTH"></asp:ListItem>
+                                    <asp:ListItem Text="EAST" Value="EAST"></asp:ListItem>
+                                    <asp:ListItem Text="SOUTH" Value="SOUTH"></asp:ListItem>
+                                    <asp:ListItem Text="WEST" Value="WEST"></asp:ListItem>
                               </asp:DropDownList>
+        </p>  
+        <p>
+            Target:<asp:DropDownList ID="ddlDim" runat="server" AppendDataBoundItems="true"></asp:DropDownList>
         </p>
         <p>
             Binding CheckPoints:
@@ -102,7 +102,7 @@ input[type=submit]:hover {
             <asp:Panel ID="panel1" runat="server"></asp:Panel>
         </p>
         <p>
-            <asp:CheckBoxList ID="chkList" runat="server" AutoPostBack="true" RepeatDirection ="Horizontal"></asp:CheckBoxList>
+            <asp:CheckBoxList ID="chkList" runat="server" AutoPostBack="false" RepeatDirection ="Horizontal"></asp:CheckBoxList>
         </p>
         <p>
             <asp:Button ID="ButtonSetTarget" runat="server" OnClick="Set_Target" Text="Start" />

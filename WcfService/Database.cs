@@ -42,11 +42,6 @@ namespace WcfService
             if (v3 != 0) conf[3] = v3;
         }
 
-        internal string getCurrPos()
-        {
-            return currPos;
-        }
-
         public float getConf(int index) { return conf[index]; }
 
         public void setStorageDim(int val) { storageDim = val; }
@@ -129,6 +124,63 @@ namespace WcfService
         public Picture GetPicture() { return picture; }
         public void SetPicture(Picture val) { picture = val; }
 
+        public string getStatus()
+        {
+            return status;
+        }
+
+        public String getCurrentOperation()
+        {
+            return currentOp;
+        }
+
+        public void setLock(bool val)
+        {
+            dbLock = val;
+        }
+        public bool getLock()
+        {
+            return dbLock;
+        }
+
+        public Dictionary<String, String> getProducts()
+        {
+            return products;
+        }
+
+        public void setPosition(String pos)
+        {
+            currPos = pos;
+        }
+        public String getPosition()
+        {
+            return currPos;
+        }
+
+        public void setDir(String dir)
+        {
+            switch (dir)
+            {
+
+                case "NORTH":
+                    currDir = Dir.NORTH;
+                    break;
+                case "EAST":
+                    currDir = Dir.EAST;
+                    break;
+                case "SOUTH":
+                    currDir = Dir.SOUTH;
+                    break;
+                case "WEST":
+                    currDir = Dir.WEST;
+                    break;
+            }
+        }
+        public string getDir()
+        {
+            return currDir.ToString();
+        }
+
         public int NewPictureId() {
             pictureId++;
             return pictureId; 
@@ -183,11 +235,7 @@ namespace WcfService
                         }
                         else status = "Checkpoint " + currPos + " reached. "; //Print arrived on checkpoint currPos
                     }
-                    // Next target selection
-                    selectLocalTarget();
-
-                    // Find route step by step (to check)
-                    findRoute(currPos, dir);
+                    //QUI
                 }
                 else if ((i = checks.FindIndex(o => string.Equals(currPos, o, StringComparison.OrdinalIgnoreCase))) > -1)
                 {
@@ -195,6 +243,12 @@ namespace WcfService
                     checks.RemoveAt(i); //if casually i'm on a checkpoint remove it
                 }
                 else status = "Heading to " + currentDest;
+
+                // Next target selection
+                selectLocalTarget();
+
+                // Find route step by step (to check)
+                findRoute(currPos, dir);
             }
             
             return getOperation();
@@ -235,13 +289,33 @@ namespace WcfService
             int Tcol = (int)currentDest[1];
             int CProw = (int)currPos[0];
             int CPcol = (int)currPos[1];
+            if(angle == -1)
+            {
+                switch (dir)
+                {
+                    case Dir.NORTH:
+                        angle = 0;
+                        break;
+
+                    case Dir.EAST:
+                        angle = 90;
+                        break;
+                    case Dir.SOUTH:
+                        angle = 180;
+                        break;
+                    default:
+                        angle = 270;
+                        break;
+                }
+            }
             string.Format("{0:000}", angle);
             if (Trow - CProw > 0)
             {
-                angle = (180 - angle) % 360;
+                angle = (540 - angle) % 360;
                 if (angle > 180)
                     angle = angle - 180;
                 //ALERT! BACKWARD2 used because no BACKWARD was found
+                status += "POS:"+currPos+" DIR:" + dir.ToString();
                 switch (dir)
                 {
                     case Dir.NORTH:
@@ -258,11 +332,11 @@ namespace WcfService
                         break;
                 }
                 currDir = Dir.SOUTH;
-                currPos = (CProw + 1).ToString() + CPcol.ToString(); 
+                currPos = (char)(CProw + 1) + ""+ (char)CPcol; 
             }
             else if (Trow - CProw < 0)
             {
-                angle = (-angle) % 360;
+                angle = (360 -angle) % 360;
                 if (angle > 180)
                     angle = angle - 180;
                 switch (dir)
@@ -280,12 +354,12 @@ namespace WcfService
                         addOperation("R" + angle.ToString());
                         break;
                 }
-                currPos = (CProw - 1).ToString() + CPcol.ToString();
+                currPos = (char)(CProw - 1) + "" + (char)CPcol;
                 currDir = Dir.NORTH;
             }
             else if (Tcol - CPcol > 0)
             {
-                angle = (90 - angle) % 360;
+                angle = (450 - angle) % 360;
                 if (angle > 180)
                     angle = angle - 180;
                 //ALERT! BACKWARD2 used because no BACKWARD was found
@@ -305,11 +379,11 @@ namespace WcfService
                         break;
                 }
                 currDir = Dir.EAST;
-                currPos = CProw.ToString() + (CPcol + 1).ToString();
+                currPos = (char)CProw + "" + (char)(CPcol + 1);
             }
             else if(Tcol - CPcol < 0)
             {
-                angle = (270 - angle) % 360;
+                angle = (630 - angle) % 360;
                 if (angle > 180)
                     angle = angle - 180;
                 switch (dir)
@@ -328,61 +402,9 @@ namespace WcfService
                         break;
                 }
                 currDir = Dir.WEST;
-                currPos = CProw.ToString() + (CPcol - 1).ToString();
+                currPos = (char)CProw + "" + (char)(CPcol - 1);
             }
         }
-
-        public string getStatus()
-        {
-            return status;
-        }
-
-        public String getCurrentOperation()
-        {
-            return currentOp;
-        }
-
-        public void setLock(bool val)
-        {
-            dbLock = val;
-        }
-        public bool getLock()
-        {
-            return dbLock;
-        }
-        public Dictionary<String, String> getProducts()
-        {
-            return products;
-        }
-        public void setPosition(String pos)
-        {
-            currPos = pos;
-        }
-        public String getPosition()
-        {
-            return currPos;
-        }
-        public void setDir(String dir)
-        {
-            switch(dir){
-
-                case "NORTH":
-                    currDir = Dir.NORTH;
-                    break;
-                case "EAST":
-                    currDir = Dir.EAST;
-                    break;
-                case "SOUTH":
-                    currDir = Dir.SOUTH;
-                    break;
-                case "WEST":
-                    currDir = Dir.WEST;
-                    break;
-            }
-        }
-        public string getDir()
-        {
-            return currDir.ToString();
-        } 
+ 
     }
 }  

@@ -40,8 +40,8 @@ namespace WcfService
                 Label4.Text = database.GetPicture().getUrl();
                 Label3.Text = database.GetPicture().getQRCode();
                 // TODO
-                Curr_pos.SelectedValue = (Label3.Text != "Error") ? Label3.Text : database.getCurrPos();
-                Curr_dir.SelectedValue = database.getDir();
+                //Curr_pos.SelectedValue = (Label3.Text != "Error") ? Label3.Text : database.getCurrPos();
+                //Curr_dir.SelectedValue = database.getDir();
                 Image1.ImageUrl = database.GetPicture().getUrl();
             }
 
@@ -49,31 +49,12 @@ namespace WcfService
             TextBox3.Text = database.getCurrentOperation();
             StatusBox.Text = database.getStatus();
 
-            if (database.needsInit())
+            /*if (database.needsInit())
             {
-                int dim = database.getStorageDim();
-                ddlDim.Items.Clear();
-                chkList.Items.Clear();
-                for (int i = 0; i < dim; i++)
-                {
-                    for (int j = 0; j < dim; j++)
-                    {
-                        if (database.getProducts().ContainsKey((char)(((int)'A') + i) + j.ToString()))
-                        {
-                            ddlDim.Items.Add(new ListItem((char)(((int)'A') + i) + j.ToString(), (char)(((int)'A') + i) + j.ToString()));
-
-                            chkList.Items.Add(new ListItem()
-                            {
-                                Text = database.getProducts()[(char)(((int)'A') + i) + j.ToString()],
-                                Value = (char)(((int)'A') + i) + j.ToString()
-                            });
-                        }
-                    }
-
-                }
+                
                 
                 database.setInit(false);
-            }
+            }*/
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -91,19 +72,39 @@ namespace WcfService
             try
             {
                 int dim = database.getStorageDim();
-                for (int i = 0; i < dim; i++)
-                    for (int j = 0; j < dim; j++)
-                        Curr_pos.Items.Add(new ListItem((char)(((int)'A') + i) + j.ToString(), (char)(((int)'A') + i) + j.ToString()));
-                while (reader.Read())
+                if (!Page.IsPostBack)
                 {
-                    database.getProducts().Add(reader[0].ToString(), reader[1].ToString());
+                    ddlDim.Items.Clear();
+                    chkList.Items.Clear();
+                    Curr_pos.Items.Clear();
+
+                    for (int i = 0; i < dim; i++)
+                    {
+                        for (int j = 0; j < dim; j++)
+                        {
+                            Curr_pos.Items.Add(new ListItem((char)(((int)'A') + i) + j.ToString(), (char)(((int)'A') + i) + j.ToString()));
+                            ddlDim.Items.Add(new ListItem((char)(((int)'A') + i) + j.ToString(), (char)(((int)'A') + i) + j.ToString()));
+
+                        }
+
+                    }
+
+                    while (reader.Read())
+                    {
+                        database.getProducts().Add(reader[0].ToString(), reader[1].ToString());
+                        chkList.Items.Add(new ListItem()
+                        {
+                            Text = reader[1].ToString(),
+                            Value = reader[0].ToString()
+                        });
+                    }
                 }
 
             }
             catch (Exception ex)
             {
                 reader.Close();
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
             }
             reader.Close();
             con.Close();
@@ -136,6 +137,8 @@ namespace WcfService
 
         protected void Set_Target(object sender, EventArgs e)
         {
+            database.setDir(Curr_dir.SelectedValue);
+            database.setPosition(Curr_pos.SelectedValue);
             if (!database.getLock())
             {
                 database.setLock(true);
@@ -145,8 +148,7 @@ namespace WcfService
                     .ToList();
                 database.SetTargetAndChecks(ddlDim.SelectedValue, selectedValues);
             }
-            database.setDir(Curr_dir.SelectedValue);
-            database.setPosition(Curr_pos.SelectedValue);
+            
         }
     }
 }
