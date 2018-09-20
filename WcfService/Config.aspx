@@ -122,7 +122,7 @@ input[type=submit]:hover {
                     </td>
                 </tr>
                 <tr>
-                    <td>Turn Deviation:</td>
+                    <td>90deg Turn Time(ms):</td>
                     <td>
                         <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                             <Triggers>

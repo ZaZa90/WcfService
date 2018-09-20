@@ -66,7 +66,7 @@ namespace WcfService
             Label1.Text = database.getConf(0).ToString("F2", CultureInfo.InvariantCulture);
             Label2.Text = database.getConf(1).ToString("F2", CultureInfo.InvariantCulture);
             Label3.Text = database.getConf(2).ToString("F2", CultureInfo.InvariantCulture);
-            Label4.Text = database.getConf(3).ToString("F2", CultureInfo.InvariantCulture);
+            Label4.Text = database.getConf(3).ToString();
             Label5.Text = database.getStorageDim().ToString();
         }
 
@@ -118,7 +118,7 @@ namespace WcfService
         {
             //Manual Left
             if (!database.getLock())
-                database.addOperation("L000");
+                database.addOperation("L090");
         }
 
         protected void Forward_Click(object sender, EventArgs e)
@@ -132,14 +132,14 @@ namespace WcfService
         {
             //Manual Right
             if (!database.getLock())
-                database.addOperation("R000");
+                database.addOperation("R090");
         }
 
         protected void Backward_Click(object sender, EventArgs e)
         {
             //Manual Backward
             if (!database.getLock())
-                database.addOperation("B000");
+                database.addOperation("B180");
         }
 
         protected void Stop_Click(object sender, EventArgs e)
