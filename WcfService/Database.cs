@@ -311,23 +311,29 @@ namespace WcfService
             string.Format("{0:000}", angle);
             if (Trow - CProw > 0)
             {
-                angle = (540 - angle) % 360;
-                if (angle > 180)
-                    angle = angle - 180;
+                
                 //ALERT! BACKWARD2 used because no BACKWARD was found
                 status += "POS:"+currPos+" DIR:" + dir.ToString();
                 switch (dir)
                 {
                     case Dir.NORTH:
+                        angle = (540 - angle) % 360;
                         addOperation("B" + angle.ToString());
                         break;
                     case Dir.SOUTH:
+                        angle = (540 - angle) % 360;
                         addOperation("F" + angle.ToString());
                         break;
                     case Dir.EAST:
+                        angle = (540 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 180;
                         addOperation("R" + angle.ToString());
                         break;
                     default:
+                        angle = (540 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 90;
                         addOperation("L" + angle.ToString());
                         break;
                 }
@@ -336,9 +342,6 @@ namespace WcfService
             }
             else if (Trow - CProw < 0)
             {
-                angle = (360 -angle) % 360;
-                if (angle > 180)
-                    angle = angle - 180;
                 switch (dir)
                 {
                     case Dir.NORTH:
@@ -348,9 +351,15 @@ namespace WcfService
                         addOperation("B" + angle.ToString());
                         break;
                     case Dir.EAST:
+                        angle = (360 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 90;
                         addOperation("L" + angle.ToString());
                         break;
                     default:
+                        angle = (360 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 180;
                         addOperation("R" + angle.ToString());
                         break;
                 }
@@ -359,22 +368,27 @@ namespace WcfService
             }
             else if (Tcol - CPcol > 0)
             {
-                angle = (450 - angle) % 360;
-                if (angle > 180)
-                    angle = angle - 180;
                 //ALERT! BACKWARD2 used because no BACKWARD was found
                 switch (dir)
                 {
                     case Dir.NORTH:
+                        angle = (450 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 180;
                         addOperation("R" + angle.ToString());
                         break;
                     case Dir.SOUTH:
+                        angle = (450 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 90;
                         addOperation("L" + angle.ToString());
                         break;
                     case Dir.EAST:
+                        angle = (450 - angle) % 360;
                         addOperation("F" + angle.ToString());
                         break;
                     default:
+                        angle = (450 - angle) % 360;
                         addOperation("B" + angle.ToString());
                         break;
                 }
@@ -383,21 +397,27 @@ namespace WcfService
             }
             else if(Tcol - CPcol < 0)
             {
-                angle = (630 - angle) % 360;
-                if (angle > 180)
-                    angle = angle - 180;
+               
                 switch (dir)
                 {
                     case Dir.NORTH:
+                        angle = (630 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 90;
                         addOperation("L" + angle.ToString());
                         break;
                     case Dir.SOUTH:
+                        angle = (630 - angle) % 360;
+                        if (angle > 180)
+                            angle = angle - 180;
                         addOperation("R" + angle.ToString());
                         break;
                     case Dir.EAST:
+                        angle = (630 - angle) % 360;
                         addOperation("B" + angle.ToString());
                         break;
                     default:
+                        angle = (630 - angle) % 360;
                         addOperation("F" + angle.ToString());
                         break;
                 }
