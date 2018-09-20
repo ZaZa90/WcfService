@@ -73,11 +73,11 @@ namespace WcfService
         protected void UpdateConfig(object sender, EventArgs e)
         {
             float slow = (float.IsNaN(floatBoxConversion(TextBox1.Text))) ? float.Parse(Label1.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox1.Text, CultureInfo.InvariantCulture);
-            float high = (float.IsNaN(floatBoxConversion(TextBox2.Text))) ? float.Parse(Label2.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox2.Text, CultureInfo.InvariantCulture);
-            int lines =(int)((float.IsNaN(floatBoxConversion(TextBox3.Text))) ? float.Parse(Label3.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox3.Text, CultureInfo.InvariantCulture));
+            float highsx = (float.IsNaN(floatBoxConversion(TextBox2.Text))) ? float.Parse(Label2.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox2.Text, CultureInfo.InvariantCulture);
+            float highdx =(float.IsNaN(floatBoxConversion(TextBox3.Text))) ? float.Parse(Label3.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox3.Text, CultureInfo.InvariantCulture);
             int turn = (int)((float.IsNaN(floatBoxConversion(TextBox4.Text))) ? float.Parse(Label4.Text, CultureInfo.InvariantCulture) : float.Parse(TextBox4.Text, CultureInfo.InvariantCulture));
-            database.setConf(slow, high, lines, turn);
-            database.addOperation("C" + slow.ToString("F2", CultureInfo.InvariantCulture) + '/' + high.ToString("F2", CultureInfo.InvariantCulture) + '/' + lines.ToString() + '/' + turn.ToString());
+            database.setConf(slow, highsx, highdx, turn);
+            database.addOperation("C" + slow.ToString("F2", CultureInfo.InvariantCulture) + '/' + highsx.ToString("F2", CultureInfo.InvariantCulture) + '/' + highdx.ToString("F2", CultureInfo.InvariantCulture) + '/' + turn.ToString());
             ReloadData();
         }
 

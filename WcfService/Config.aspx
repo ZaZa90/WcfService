@@ -88,7 +88,7 @@ input[type=submit]:hover {
                     </td>
                 </tr>
                 <tr>
-                    <td>Cruise Speed:</td>
+                    <td>Cruise Speed(Left):</td>
                     <td>
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                             <Triggers>
@@ -105,7 +105,7 @@ input[type=submit]:hover {
                     </td>
                 </tr>
                 <tr>
-                    <td># of Lines:</td>
+                    <td>Cruise Speed(Right):</td>
                     <td>
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                             <Triggers>
